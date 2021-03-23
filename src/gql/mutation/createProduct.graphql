@@ -4,9 +4,9 @@ mutation CreateProduct($data: ProductInput!) {
   ) {
     id
     name
-    price
     category
-    description
+    price
+    url
     vendorId
   }
 }

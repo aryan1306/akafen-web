@@ -62,7 +62,7 @@ const IndexCarousel = () => {
 			autoPlaySpeed={7000}
 		>
 			{srcs.map((s) => (
-				<img key={s.id} src={s.url} alt="slider-pics" />
+				<img src={s.url} key={s.id} alt="flea-market" />
 			))}
 		</Carousel>
 	);

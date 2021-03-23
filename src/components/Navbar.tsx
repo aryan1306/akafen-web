@@ -106,9 +106,15 @@ const Navbar = () => {
 						w="20"
 					/>
 				</Box>
-				<Heading fontSize={mobile ? "1.5rem" : "2rem"} color="brand.300" ml={2}>
-					Akafen Flea
-				</Heading>
+				<NextLink href="/">
+					<Heading
+						fontSize={mobile ? "1.5rem" : "2rem"}
+						color="brand.300"
+						ml={2}
+					>
+						Akafen Flea
+					</Heading>
+				</NextLink>
 			</Flex>
 			{body}
 		</>

@@ -11,6 +11,12 @@ import {
 	Spinner,
 	useMediaQuery,
 	Button,
+	AlertDialog,
+	AlertDialogBody,
+	AlertDialogContent,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogOverlay,
 } from "@chakra-ui/react";
 import { withUrqlClient } from "next-urql";
 import React, { useEffect } from "react";
@@ -31,6 +37,9 @@ import Head from "next/head";
 const MyProducts = () => {
 	const history = useRouter();
 	const [mobile] = useMediaQuery("(max-width: 813px)");
+	const [isOpen, setIsOpen] = React.useState(false);
+	const onClose = () => setIsOpen(false);
+	const cancelRef = React.useRef();
 	const [, deleteProduct] = useDeleteMyProductMutation();
 	const [{ fetching, data, error }] = useMyProductsQuery();
 	const [{ fetching: vendorFetch, data: meData }] = useVendorMeQueryQuery();
@@ -40,6 +49,7 @@ const MyProducts = () => {
 			notify("Login to access that feature", false);
 		}
 	}, [vendorFetch, meData, history]);
+
 	if (fetching) {
 		return (
 			<>
@@ -76,7 +86,7 @@ const MyProducts = () => {
 	return (
 		<>
 			<Head>
-				<title>{`${meData.vendorMeQuery?.brandName}'s Inventory`}</title>
+				<title>My Inventory</title>
 			</Head>
 			<Navbar />
 			<Heading my={4} color="brand.300" textAlign="center">
@@ -113,20 +123,46 @@ const MyProducts = () => {
 											</Button>
 										</NextLink>
 										<Button
-											onClick={() => {
-												confirm(
-													`Are you sure you want to delete product ${p.name}`
-												);
-												if (confirm) {
-													deleteProduct({ id: p.id });
-													history.reload();
-												}
-											}}
 											variant="outline"
 											colorScheme="red"
+											onClick={() => setIsOpen(true)}
 										>
-											Remove
+											Delete
 										</Button>
+
+										<AlertDialog
+											isOpen={isOpen}
+											leastDestructiveRef={cancelRef}
+											onClose={onClose}
+										>
+											<AlertDialogOverlay>
+												<AlertDialogContent>
+													<AlertDialogHeader fontSize="lg" fontWeight="bold">
+														Delete Customer
+													</AlertDialogHeader>
+
+													<AlertDialogBody>
+														Are you sure? You can't undo this action afterwards.
+													</AlertDialogBody>
+
+													<AlertDialogFooter>
+														<Button ref={cancelRef} onClick={onClose}>
+															Cancel
+														</Button>
+														<Button
+															colorScheme="red"
+															onClick={() => {
+																deleteProduct({ id: p.id });
+																history.reload();
+															}}
+															ml={3}
+														>
+															Delete
+														</Button>
+													</AlertDialogFooter>
+												</AlertDialogContent>
+											</AlertDialogOverlay>
+										</AlertDialog>
 									</Flex>
 								</Box>
 							</Box>

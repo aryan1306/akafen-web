@@ -38,13 +38,15 @@ const CreateProduct = () => {
 		? firebase.initializeApp(firebaseConfig)
 		: firebase.app();
 
-	const [{ fetching, data }] = useVendorMeQueryQuery();
+	const [{ fetching, data }] = useVendorMeQueryQuery({});
 	const [, createProduct] = useCreateProductMutation();
 	const [mobile] = useMediaQuery("(max-width: 813px)");
 	const [files, setFiles] = useState([] as File[]);
+	const [fileLength, setFileLength] = useState(0);
 	const [url, setUrl] = useState<string[]>([]);
 	const [progressState, setProgressState] = useState(0);
 	const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setFileLength(e.target.files!.length);
 		for (let i = 0; i < e.target.files!.length; i++) {
 			const newFile = e.target.files![i];
 			setFiles((prevState) => [...prevState, newFile]);
@@ -114,15 +116,12 @@ const CreateProduct = () => {
 				<Heading fontSize={mobile ? "1.5rem" : "3rem"} color="brand.300" ml={2}>
 					Akafen Flea
 				</Heading>
-				<Text ml={4} fontFamily="body">
-					by KEY EVENTS
-				</Text>
 			</Flex>
 			<Container maxW="container.md">
 				<Heading color="brand.300" mt={5}>
-					Create Your First Product{" "}
+					Add Product{" "}
 				</Heading>
-				<Text fontSize="1.6rem">Let all of India see your unique product</Text>
+				<Text fontSize="1.6rem">Let all of India see your creativity</Text>
 				<Box my={4}>
 					<Formik
 						initialValues={{
@@ -203,7 +202,8 @@ const CreateProduct = () => {
 									aria-label="upload"
 									mt={2}
 									color="brand.200"
-									disabled={isSubmitting}
+									disabled={fileLength < 1}
+									isLoading={isSubmitting}
 									onClick={handleClick}
 									rightIcon={<AttachmentIcon />}
 								>

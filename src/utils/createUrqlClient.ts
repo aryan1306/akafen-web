@@ -1,17 +1,17 @@
-import { isServer } from "./isServer";
-import { cacheExchange, QueryInput, Cache } from "@urql/exchange-graphcache";
+import { Cache, cacheExchange, QueryInput } from "@urql/exchange-graphcache";
 import { dedupExchange, fetchExchange } from "urql";
 import {
 	LogoutMutation,
-	VendorMeQueryQuery,
-	VendorMeQueryDocument,
+	UserLoginMutation,
 	UserMeDocument,
 	UserMeQuery,
-	VendorLoginMutation,
-	UserLoginMutation,
-	VendorRegisterMutation,
 	UserRegisterMutation,
+	VendorLoginMutation,
+	VendorMeQueryDocument,
+	VendorMeQueryQuery,
+	VendorRegisterMutation,
 } from "../generated/graphql";
+import { isServer } from "./isServer";
 
 function betterUpdateQuery<Result, Query>(
 	cache: Cache,
@@ -38,6 +38,12 @@ export const createUrqlClient = (ssrExchange: any, ctx: any) => {
 			cacheExchange({
 				updates: {
 					Mutation: {
+						createProduct: (_result, _args, cache, _info) => {
+							cache.invalidate({ __typename: "Query" }, "allProducts");
+						},
+						editProduct: (_result, _args, cache, _info) => {
+							cache.invalidate({ __typename: "Query" }, "allProducts");
+						},
 						logout: (_result, _args, cache, _info) => {
 							betterUpdateQuery<LogoutMutation, VendorMeQueryQuery>(
 								cache,

@@ -273,7 +273,7 @@ export type CreateProductMutation = (
   { __typename?: 'Mutation' }
   & { createProduct: (
     { __typename?: 'Product' }
-    & Pick<Product, 'id' | 'name' | 'price' | 'category' | 'description' | 'vendorId'>
+    & Pick<Product, 'id' | 'name' | 'category' | 'price' | 'url' | 'vendorId'>
   ) }
 );
 
@@ -356,11 +356,7 @@ export type MyProductsQuery = (
   { __typename?: 'Query' }
   & { myProducts?: Maybe<Array<(
     { __typename?: 'Product' }
-    & Pick<Product, 'id' | 'name' | 'category' | 'price' | 'description' | 'url'>
-    & { vendor: (
-      { __typename?: 'Vendor' }
-      & Pick<Vendor, 'id' | 'brandName'>
-    ) }
+    & Pick<Product, 'id' | 'name' | 'category' | 'price' | 'url' | 'vendorId'>
   )>> }
 );
 
@@ -493,9 +489,9 @@ export const CreateProductDocument = gql`
   createProduct(data: $data) {
     id
     name
-    price
     category
-    description
+    price
+    url
     vendorId
   }
 }
@@ -592,12 +588,8 @@ export const MyProductsDocument = gql`
     name
     category
     price
-    description
     url
-    vendor {
-      id
-      brandName
-    }
+    vendorId
   }
 }
     `;

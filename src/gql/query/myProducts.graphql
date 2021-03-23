@@ -4,11 +4,7 @@ query MyProducts {
     name
     category
     price
-    description
     url
-    vendor{
-      id
-      brandName
-    }
+    vendorId
   }
 }
