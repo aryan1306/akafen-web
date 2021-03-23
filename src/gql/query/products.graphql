@@ -1,0 +1,14 @@
+query ProductByCategory ($category: String!) {
+  allProductsByCategory(category:$category){
+    id
+    name
+    category
+    price 
+    description
+    vendor {
+      id
+      brandName
+    }
+    url
+  }
+}

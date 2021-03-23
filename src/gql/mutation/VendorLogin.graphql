@@ -1,0 +1,7 @@
+mutation VendorLogin ($email: String!, $password: String!){
+  login(email: $email, password: $password){
+    id
+    email
+    brandName
+  }
+}

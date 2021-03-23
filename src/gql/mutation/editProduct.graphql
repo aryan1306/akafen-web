@@ -1,0 +1,9 @@
+mutation EditProduct($id: String!, $data: EditProductInput!) {
+  editProduct(id: $id, data: $data) {
+    id
+    name
+    price
+    category
+    description
+  }
+}

@@ -6,6 +6,8 @@
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "jsx": "preserve",
+    "noImplicitAny":true,
+    "strictNullChecks": false,
     "lib": ["dom", "es2017"],
     "module": "esnext",
     "moduleResolution": "node",

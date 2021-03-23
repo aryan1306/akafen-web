@@ -1,0 +1,7 @@
+query VendorMeQuery {
+  vendorMeQuery{
+    id
+    brandName
+    email
+  }
+}

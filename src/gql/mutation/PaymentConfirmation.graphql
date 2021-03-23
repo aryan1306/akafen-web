@@ -1,0 +1,3 @@
+mutation PaymentConfirmation ($code: String!) {
+  confirmPayment(code: $code) 
+}

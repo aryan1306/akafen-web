@@ -1,0 +1,15 @@
+mutation VendorRegister($data: VendorInput!) {
+  register(data:$data) {
+    id
+    createdAt
+    brandName
+    email
+    city
+    createdAt
+    mobile
+    whatsapp
+    facebook
+    website
+    instaURL
+  }
+}

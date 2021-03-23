@@ -1,0 +1,19 @@
+query Product ($id: String!) {
+  product(id: $id){
+    id
+    name
+    category
+    price
+    description
+    vendor{
+      id
+      brandName
+      mobile
+      whatsapp
+      facebook
+      website
+      instaURL
+    }
+    url
+  }
+}

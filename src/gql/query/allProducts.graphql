@@ -1,0 +1,13 @@
+query AllProducts {
+  allProducts {
+    id
+    name
+    price
+    category
+    url
+    vendor {
+      id
+      brandName
+    }
+  }
+}

@@ -1,0 +1,14 @@
+query MyProducts {
+  myProducts {
+    id
+    name
+    category
+    price
+    description
+    url
+    vendor{
+      id
+      brandName
+    }
+  }
+}
