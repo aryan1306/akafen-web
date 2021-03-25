@@ -6,6 +6,7 @@ import {
 	FormControl,
 	FormLabel,
 	Heading,
+	Text,
 	Input,
 	Link,
 } from "@chakra-ui/react";
@@ -85,6 +86,21 @@ const VendorLogin = () => {
 						</Form>
 					)}
 				</Formik>
+				<Flex direction="column" justifyContent="center" alignItems="center">
+					<Text color="brand.200">Useful Links</Text>
+					<ul style={{ listStyleType: "none" }}>
+						<NextLink href="/vendor/reconfirm-payment">
+							<li>
+								<Link>Confirm Payment</Link>
+							</li>
+						</NextLink>
+						{/* <NextLink href="/vendor/confirm-email">
+							<li>
+								<Link>Confirm Email</Link>
+							</li>
+						</NextLink> */}
+					</ul>
+				</Flex>
 			</Container>
 		</>
 	);

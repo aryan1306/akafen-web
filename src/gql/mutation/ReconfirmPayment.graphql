@@ -1,0 +1,3 @@
+mutation ReconfirmPayment ($email: String!) {
+  reconfirmPayment(email: $email)
+}

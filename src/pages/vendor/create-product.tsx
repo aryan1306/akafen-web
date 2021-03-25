@@ -10,6 +10,8 @@ import {
 	Heading,
 	Image,
 	Input,
+	InputGroup,
+	InputLeftAddon,
 	Progress,
 	Select,
 	Text,
@@ -185,11 +187,10 @@ const CreateProduct = () => {
 								<Box my={3}>
 									<FormControl id="price" name="price" isRequired>
 										<FormLabel>Price</FormLabel>
-										<Input
-											type="tel"
-											placeholder="in Rupees"
-											onChange={handleChange}
-										/>
+										<InputGroup>
+											<InputLeftAddon children="₹" />
+											<Input type="tel" onChange={handleChange} />
+										</InputGroup>
 										<FormHelperText>should be a number</FormHelperText>
 									</FormControl>
 								</Box>
@@ -197,6 +198,9 @@ const CreateProduct = () => {
 									Upload files:
 									<input type="file" multiple onChange={onFileChange} />
 								</label>
+								<Text color="#718096" mt={2} textAlign="center">
+									Click on the upload button after selecting the photos
+								</Text>
 								<Button
 									variant="outline"
 									aria-label="upload"
@@ -209,7 +213,6 @@ const CreateProduct = () => {
 								>
 									Upload
 								</Button>
-
 								<br />
 								<Button
 									my={4}

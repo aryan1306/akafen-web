@@ -3,5 +3,6 @@ mutation VendorLogin ($email: String!, $password: String!){
     id
     email
     brandName
+    hasPaid
   }
 }

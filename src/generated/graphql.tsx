@@ -21,6 +21,7 @@ export type Vendor = {
   id: Scalars['ID'];
   email: Scalars['String'];
   city: Scalars['String'];
+  hasPaid: Scalars['Boolean'];
   createdAt: Scalars['DateTime'];
   brandName: Scalars['String'];
   mobile: Scalars['String'];
@@ -125,6 +126,7 @@ export type Mutation = {
   register: Vendor;
   login: Vendor;
   confirmVendor: Scalars['Boolean'];
+  reconfirmPayment: Scalars['Boolean'];
   confirmPayment: Scalars['Boolean'];
   logout: Scalars['Boolean'];
 };
@@ -177,6 +179,11 @@ export type MutationConfirmVendorArgs = {
 };
 
 
+export type MutationReconfirmPaymentArgs = {
+  email: Scalars['String'];
+};
+
+
 export type MutationConfirmPaymentArgs = {
   code: Scalars['String'];
 };
@@ -189,6 +196,16 @@ export type PaymentConfirmationMutationVariables = Exact<{
 export type PaymentConfirmationMutation = (
   { __typename?: 'Mutation' }
   & Pick<Mutation, 'confirmPayment'>
+);
+
+export type ReconfirmPaymentMutationVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type ReconfirmPaymentMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'reconfirmPayment'>
 );
 
 export type ConfirmUserMutationVariables = Exact<{
@@ -247,7 +264,7 @@ export type VendorLoginMutation = (
   { __typename?: 'Mutation' }
   & { login: (
     { __typename?: 'Vendor' }
-    & Pick<Vendor, 'id' | 'email' | 'brandName'>
+    & Pick<Vendor, 'id' | 'email' | 'brandName' | 'hasPaid'>
   ) }
 );
 
@@ -404,6 +421,15 @@ export const PaymentConfirmationDocument = gql`
 export function usePaymentConfirmationMutation() {
   return Urql.useMutation<PaymentConfirmationMutation, PaymentConfirmationMutationVariables>(PaymentConfirmationDocument);
 };
+export const ReconfirmPaymentDocument = gql`
+    mutation ReconfirmPayment($email: String!) {
+  reconfirmPayment(email: $email)
+}
+    `;
+
+export function useReconfirmPaymentMutation() {
+  return Urql.useMutation<ReconfirmPaymentMutation, ReconfirmPaymentMutationVariables>(ReconfirmPaymentDocument);
+};
 export const ConfirmUserDocument = gql`
     mutation ConfirmUser($code: String!) {
   confirmUser(code: $code)
@@ -456,6 +482,7 @@ export const VendorLoginDocument = gql`
     id
     email
     brandName
+    hasPaid
   }
 }
     `;
