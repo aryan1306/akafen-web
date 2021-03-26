@@ -110,7 +110,7 @@ const Index = () => {
 					</SimpleGrid>
 					<Flex mt={6} justifyContent="center" alignItems="center">
 						<NextLink href="/shop">
-							<Link fontSize="1.75rem">See More</Link>
+							<Link fontSize="1.75rem">See All</Link>
 						</NextLink>
 						<IoChevronForwardOutline size="1.6rem" color="brand.300" />
 					</Flex>
