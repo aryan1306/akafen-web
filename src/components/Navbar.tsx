@@ -11,7 +11,7 @@ import NextLink from "next/link";
 import React from "react";
 import {
 	useLogoutMutation,
-	// useUserMeQuery,
+	useUserMeQuery,
 	useVendorMeQueryQuery,
 } from "../generated/graphql";
 import { useRouter } from "next/router";
@@ -21,14 +21,17 @@ const Navbar = () => {
 	const router = useRouter();
 	const [mobile] = useMediaQuery("(max-width: 813px)");
 	const [{ data, fetching }] = useVendorMeQueryQuery();
-	// const [{ data: userData, fetching: userFetching }] = useUserMeQuery();
+	const [{ data: userData, fetching: userFetching }] = useUserMeQuery();
 	const [{ fetching: logoutFetching }, logout] = useLogoutMutation();
 	let body = null;
 
-	if (fetching) {
+	if (fetching || userFetching) {
 		body = <div>Loading...</div>;
 	}
-	if (!fetching && !data?.vendorMeQuery) {
+	if (
+		(!fetching && !data?.vendorMeQuery) ||
+		(!userFetching && !userData?.userMe)
+	) {
 		body = (
 			<Flex
 				h="3.1rem"
@@ -39,15 +42,46 @@ const Navbar = () => {
 				<RouteLink fontSize="1.4rem" p={7} as={NextLink} href="/aboutus">
 					About Us
 				</RouteLink>
-				<RouteLink fontSize="1.4rem" p={7} as={NextLink} href="/vendor-login">
-					Seller Login
-				</RouteLink>
 				<RouteLink p={7} as={NextLink} href="/vendor-register">
-					Seller SignUp
+					Seller Panel
+				</RouteLink>
+				<RouteLink fontSize="1.4rem" p={7} as={NextLink} href="/users/register">
+					Customer
 				</RouteLink>
 			</Flex>
 		);
-	} else if (data?.vendorMeQuery) {
+	}
+	if (userData?.userMe) {
+		body = (
+			<Flex
+				h="3.1rem"
+				bg="brand.200"
+				justifyContent="space-evenly"
+				alignItems="center"
+			>
+				<RouteLink fontSize="1.4rem" p={7} as={NextLink} href="/aboutus">
+					About Us
+				</RouteLink>
+				<RouteLink fontSize="1.4rem" p={7} as={NextLink} href="/shop">
+					Explore
+				</RouteLink>
+				<Button
+					fontSize="1.4rem"
+					disabled={logoutFetching}
+					color="brand.300"
+					onClick={() => {
+						logout();
+						router.replace("/");
+					}}
+					p={7}
+					variant="link"
+				>
+					Logout
+				</Button>
+			</Flex>
+		);
+	}
+	if (data?.vendorMeQuery) {
 		body = (
 			<Flex
 				h="3.1rem"

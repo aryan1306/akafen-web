@@ -1,6 +1,7 @@
 import { Container, Heading, Text, useMediaQuery } from "@chakra-ui/react";
 import Head from "next/head";
 import React from "react";
+import Navbar from "../components/Navbar";
 
 const AboutUs = () => {
 	const [mobile] = useMediaQuery("max-width: 760px");
@@ -17,6 +18,7 @@ const AboutUs = () => {
 							provide the customers with variety of exciting products."
 				/>
 			</Head>
+			<Navbar />
 			<Heading color="brand.300" textAlign="center" my={3}>
 				About Us
 			</Heading>

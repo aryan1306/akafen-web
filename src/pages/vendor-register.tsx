@@ -19,6 +19,7 @@ import { notify } from "../utils/toast";
 import { createUrqlClient } from "../utils/createUrqlClient";
 import React from "react";
 import Head from "next/head";
+import Navbar from "../components/Navbar";
 
 const VendorRegister = () => {
 	const history = useRouter();
@@ -29,6 +30,7 @@ const VendorRegister = () => {
 			<Head>
 				<title>Akafen Seller Registration</title>
 			</Head>
+			<Navbar />
 			<Container maxW="md">
 				<Heading my={4} color="brand.300">
 					Seller Registration

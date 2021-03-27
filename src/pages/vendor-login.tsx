@@ -19,6 +19,7 @@ import { useVendorLoginMutation } from "../generated/graphql";
 import { createUrqlClient } from "../utils/createUrqlClient";
 import { notify } from "../utils/toast";
 import Head from "next/head";
+import Navbar from "../components/Navbar";
 
 const VendorLogin = () => {
 	const history = useRouter();
@@ -29,6 +30,7 @@ const VendorLogin = () => {
 			<Head>
 				<title>Akafen Seller Login</title>
 			</Head>
+			<Navbar />
 			<Container maxW="md">
 				<Heading color="brand.300" my={4}>
 					Seller Login

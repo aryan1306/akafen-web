@@ -17,12 +17,14 @@ import React from "react";
 import { createUrqlClient } from "../../utils/createUrqlClient";
 import { notify } from "../../utils/toast";
 import { useUserRegisterMutation } from "../../generated/graphql";
+import Navbar from "../../components/Navbar";
 
 const Register = ({}) => {
 	const history = useRouter();
 	const [, register] = useUserRegisterMutation();
 	return (
 		<>
+			<Navbar />
 			<Container maxW="md">
 				<Heading my={4} color="brand.300">
 					Register

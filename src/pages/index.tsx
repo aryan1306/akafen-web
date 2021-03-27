@@ -89,7 +89,7 @@ const Index = () => {
 						Explore
 					</Heading>
 					<Text fontSize={mobile ? "1.1rem" : "1.6rem"}>
-						The Flea Market Products You Love 💕
+						The Flea Market You Love 💕
 					</Text>
 					<SimpleGrid mt={5} columns={2} spacing={1}>
 						{list.map((li) => (

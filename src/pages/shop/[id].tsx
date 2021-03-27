@@ -32,7 +32,7 @@ const Post = () => {
 	const history = useRouter();
 	const [mobile] = useMediaQuery("(max-width: 813px");
 	const { isOpen, onToggle } = useDisclosure();
-	const [{ data: userData, fetching: userFetch }] = useUserMeQuery();
+	const [{ data: userData }] = useUserMeQuery();
 	// useEffect(() => {
 	// 	if(!userData && !userFetch){
 
@@ -137,25 +137,28 @@ const Post = () => {
 					<Text textAlign="center" my={4}>
 						Here are the ways to get in Touch with the Seller
 					</Text>
-					{!userFetch && !userData ? (
-						<Box my={3}>
-							<Button
-								color="white"
-								bg="brand.300"
-								_hover={{ bg: "brand.200" }}
-								onClick={() => history.push("/users/register")}
-							>
-								Sign Up
-							</Button>
-							<Button
-								color="white"
-								bg="brand.200"
-								_hover={{ color: "brown" }}
-								onClick={() => history.push("/users/login")}
-							>
-								Login
-							</Button>
-						</Box>
+					{!userData?.userMe ? (
+						<Flex justifyContent="center">
+							<Box my={3}>
+								<Button
+									color="white"
+									bg="brand.300"
+									mr={5}
+									_hover={{ bg: "brand.200" }}
+									onClick={() => history.push("/users/register")}
+								>
+									Sign Up
+								</Button>
+								<Button
+									color="white"
+									bg="brand.200"
+									_hover={{ color: "brown" }}
+									onClick={() => history.push("/users/login")}
+								>
+									Login
+								</Button>
+							</Box>
+						</Flex>
 					) : (
 						<>
 							<Text textAlign="center" fontSize="1.3rem">
