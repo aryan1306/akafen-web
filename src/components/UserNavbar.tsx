@@ -5,16 +5,14 @@ import { useUserMeQuery } from "../generated/graphql";
 
 const UserNav = () => {
 	const [mobile] = useMediaQuery("(max-width: 813px)");
-  const [{data, fetching}] = useUserMeQuery()
-  let body = null;
-  if(fetching){
-    body = <div className="">Loading...</div>
-  }
-  if(!fetching && !data?.userMe){
-    body= (
-
-    )
-  }
+	const [{ data, fetching }] = useUserMeQuery();
+	let body = null;
+	if (fetching) {
+		body = <div className="">Loading...</div>;
+	}
+	if (!fetching && !data?.userMe) {
+		body = <div>kj</div>;
+	}
 	return (
 		<>
 			<Flex
