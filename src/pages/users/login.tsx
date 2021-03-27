@@ -17,12 +17,14 @@ import { useUserLoginMutation } from "../../generated/graphql";
 import NextLink from "next/link";
 import { createUrqlClient } from "../../utils/createUrqlClient";
 import { notify } from "../../utils/toast";
+import Navbar from "../../components/Navbar";
 
 const Login = ({}) => {
 	const history = useRouter();
 	const [, login] = useUserLoginMutation();
 	return (
 		<>
+			<Navbar />
 			<Container maxW="md">
 				<Heading color="brand.300" my={4}>
 					Seller Login
