@@ -38,11 +38,28 @@ export const createUrqlClient = (ssrExchange: any, ctx: any) => {
 			cacheExchange({
 				updates: {
 					Mutation: {
+						// createProduct: (_result, _args, cache, _info) => {
+						// 	cache.invalidate({ __typename: "Query" }, "allProducts");
+						// },
 						createProduct: (_result, _args, cache, _info) => {
-							cache.invalidate({ __typename: "Query" }, "allProducts");
+							const key = "Query";
+							//@ts-ignore
+							const fields = cache
+								.inspectFields(key)
+								.filter((field) => field.fieldName.includes("Products"))
+								.forEach((field) => {
+									cache.invalidate(key, field.fieldKey);
+								});
 						},
 						editProduct: (_result, _args, cache, _info) => {
-							cache.invalidate({ __typename: "Query" }, "allProducts");
+							const key = "Query";
+							//@ts-ignore
+							const fields = cache
+								.inspectFields(key)
+								.filter((field) => field.fieldName.includes("Products"))
+								.forEach((field) => {
+									cache.invalidate(key, field.fieldKey);
+								});
 						},
 						logout: (_result, _args, cache, _info) => {
 							betterUpdateQuery<LogoutMutation, VendorMeQueryQuery>(
@@ -52,8 +69,15 @@ export const createUrqlClient = (ssrExchange: any, ctx: any) => {
 								() => ({ vendorMeQuery: null })
 							);
 						},
-						deleteProduct: (result, args, cache, info) => {
-							cache.invalidate({ __typename: "Query" }, "allProducts");
+						deleteProduct: (_result, _args, cache, _info) => {
+							const key = "Query";
+							//@ts-ignore
+							const fields = cache
+								.inspectFields(key)
+								.filter((field) => field.fieldName.includes("Products"))
+								.forEach((field) => {
+									cache.invalidate(key, field.fieldKey);
+								});
 						},
 						userRegister: (_result, _args, cache, _info) => {
 							betterUpdateQuery<UserRegisterMutation, UserMeQuery>(
