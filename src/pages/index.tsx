@@ -89,7 +89,7 @@ const Index = () => {
 						Explore
 					</Heading>
 					<Text fontSize={mobile ? "1.1rem" : "1.6rem"}>
-						The Flea Market Products You Love 💕
+						The Flea Market You Love 💕
 					</Text>
 					<SimpleGrid mt={5} columns={2} spacing={1}>
 						{list.map((li) => (
@@ -110,7 +110,7 @@ const Index = () => {
 					</SimpleGrid>
 					<Flex mt={6} justifyContent="center" alignItems="center">
 						<NextLink href="/shop">
-							<Link fontSize="1.75rem">See More</Link>
+							<Link fontSize="1.75rem">See All</Link>
 						</NextLink>
 						<IoChevronForwardOutline size="1.6rem" color="brand.300" />
 					</Flex>

@@ -28,7 +28,7 @@ export const createUrqlClient = (ssrExchange: any, ctx: any) => {
 		cookie = ctx?.req?.headers?.cookie;
 	}
 	return {
-		url: process.env.NEXT_PUBLIC_API_URL!,
+		url: process.env.NEXT_PUBLIC_LOC_URL!,
 		fetchOptions: {
 			credentials: "include" as const,
 			headers: cookie ? { cookie } : undefined,
@@ -38,11 +38,28 @@ export const createUrqlClient = (ssrExchange: any, ctx: any) => {
 			cacheExchange({
 				updates: {
 					Mutation: {
+						// createProduct: (_result, _args, cache, _info) => {
+						// 	cache.invalidate({ __typename: "Query" }, "allProducts");
+						// },
 						createProduct: (_result, _args, cache, _info) => {
-							cache.invalidate({ __typename: "Query" }, "allProducts");
+							const key = "Query";
+							//@ts-ignore
+							const fields = cache
+								.inspectFields(key)
+								.filter((field) => field.fieldName.includes("Products"))
+								.forEach((field) => {
+									cache.invalidate(key, field.fieldKey);
+								});
 						},
 						editProduct: (_result, _args, cache, _info) => {
-							cache.invalidate({ __typename: "Query" }, "allProducts");
+							const key = "Query";
+							//@ts-ignore
+							const fields = cache
+								.inspectFields(key)
+								.filter((field) => field.fieldName.includes("Products"))
+								.forEach((field) => {
+									cache.invalidate(key, field.fieldKey);
+								});
 						},
 						logout: (_result, _args, cache, _info) => {
 							betterUpdateQuery<LogoutMutation, VendorMeQueryQuery>(
@@ -53,7 +70,14 @@ export const createUrqlClient = (ssrExchange: any, ctx: any) => {
 							);
 						},
 						deleteProduct: (_result, _args, cache, _info) => {
-							cache.invalidate({ __typename: "Query" }, "allProducts");
+							const key = "Query";
+							//@ts-ignore
+							const fields = cache
+								.inspectFields(key)
+								.filter((field) => field.fieldName.includes("Products"))
+								.forEach((field) => {
+									cache.invalidate(key, field.fieldKey);
+								});
 						},
 						userRegister: (_result, _args, cache, _info) => {
 							betterUpdateQuery<UserRegisterMutation, UserMeQuery>(

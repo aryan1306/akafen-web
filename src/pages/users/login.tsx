@@ -27,7 +27,7 @@ const Login = ({}) => {
 			<Navbar />
 			<Container maxW="md">
 				<Heading color="brand.300" my={4}>
-					Seller Login
+					Login
 				</Heading>
 				<Formik
 					initialValues={{
