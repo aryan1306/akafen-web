@@ -97,13 +97,13 @@ const EditPost = () => {
 						{({ isSubmitting, handleChange }) => (
 							<Form>
 								<Box my={3}>
-									<FormControl id="name" name="name" isRequired>
+									<FormControl id="name" name="name">
 										<FormLabel>Product Name</FormLabel>
 										<Input onChange={handleChange} />
 									</FormControl>
 								</Box>
 								<Box my={3}>
-									<FormControl id="description" name="description" isRequired>
+									<FormControl id="description" name="description">
 										<FormLabel>Description</FormLabel>
 										<Textarea
 											placeholder="My product is awesome because..."
@@ -112,7 +112,7 @@ const EditPost = () => {
 									</FormControl>
 								</Box>
 								<Box my={3}>
-									<FormControl id="category" name="category" isRequired>
+									<FormControl id="category" name="category">
 										<Select
 											onChange={handleChange}
 											placeholder="Select Category"
@@ -126,7 +126,7 @@ const EditPost = () => {
 									</FormControl>
 								</Box>
 								<Box my={3}>
-									<FormControl id="price" name="price" isRequired>
+									<FormControl id="price" name="price">
 										<FormLabel>Price</FormLabel>
 										<Input
 											type="tel"

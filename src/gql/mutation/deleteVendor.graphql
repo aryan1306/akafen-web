@@ -1,0 +1,3 @@
+mutation DeleteVendor($phone: String!) {
+  deleteVendor(phone: $phone)
+}

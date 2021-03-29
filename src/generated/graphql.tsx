@@ -101,8 +101,10 @@ export type Query = {
   allProductsByCategory: Array<Product>;
   product: Product;
   userMe?: Maybe<Users>;
+  allUsers: Array<Users>;
   hello: Scalars['String'];
   vendorMeQuery?: Maybe<Vendor>;
+  allVendors: Array<Vendor>;
 };
 
 
@@ -129,6 +131,7 @@ export type Mutation = {
   reconfirmPayment: Scalars['Boolean'];
   confirmPayment: Scalars['Boolean'];
   logout: Scalars['Boolean'];
+  deleteVendor: Scalars['Boolean'];
 };
 
 
@@ -186,6 +189,11 @@ export type MutationReconfirmPaymentArgs = {
 
 export type MutationConfirmPaymentArgs = {
   code: Scalars['String'];
+};
+
+
+export type MutationDeleteVendorArgs = {
+  phone: Scalars['String'];
 };
 
 export type PaymentConfirmationMutationVariables = Exact<{
@@ -305,6 +313,16 @@ export type DeleteMyProductMutation = (
     { __typename?: 'Product' }
     & Pick<Product, 'id' | 'name'>
   ) }
+);
+
+export type DeleteVendorMutationVariables = Exact<{
+  phone: Scalars['String'];
+}>;
+
+
+export type DeleteVendorMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'deleteVendor'>
 );
 
 export type EditProductMutationVariables = Exact<{
@@ -538,6 +556,15 @@ export const DeleteMyProductDocument = gql`
 
 export function useDeleteMyProductMutation() {
   return Urql.useMutation<DeleteMyProductMutation, DeleteMyProductMutationVariables>(DeleteMyProductDocument);
+};
+export const DeleteVendorDocument = gql`
+    mutation DeleteVendor($phone: String!) {
+  deleteVendor(phone: $phone)
+}
+    `;
+
+export function useDeleteVendorMutation() {
+  return Urql.useMutation<DeleteVendorMutation, DeleteVendorMutationVariables>(DeleteVendorDocument);
 };
 export const EditProductDocument = gql`
     mutation EditProduct($id: String!, $data: EditProductInput!) {
