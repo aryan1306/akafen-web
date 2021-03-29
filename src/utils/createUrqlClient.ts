@@ -52,6 +52,9 @@ export const createUrqlClient = (ssrExchange: any, ctx: any) => {
 								() => ({ vendorMeQuery: null })
 							);
 						},
+						deleteProduct: (_result, _args, cache, _info) => {
+							cache.invalidate({ __typename: "Query" }, "allProducts");
+						},
 						userRegister: (_result, _args, cache, _info) => {
 							betterUpdateQuery<UserRegisterMutation, UserMeQuery>(
 								cache,
