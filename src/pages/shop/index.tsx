@@ -68,44 +68,76 @@ const All = () => {
 				Explore All Categories
 			</Heading>
 
-			<Container my={4} maxW="container.xl">
-				<SimpleGrid columns={mobile ? 2 : 3} spacing={mobile ? 1 : "0.6rem"}>
-					{data?.allProducts.map((p) => (
-						<>
-							<Box
-								maxW={mobile ? "sm" : "3xl"}
-								borderWidth="1px"
-								borderRadius="lg"
-								overflow="hidden"
-							>
-								<Img src={p.url[0]} alt={p.name} />
-								<Box p={3}>
-									<NextLink href="/shop/[id]" as={`/shop/${p.id}`}>
-										<Text
-											fontSize="1.4rem"
-											fontWeight="semibold"
-											as="h4"
-											isTruncated
-										>
-											{p.name}
-										</Text>
-									</NextLink>
-
+			{mobile ? (
+				<Container p={4} maxW="container.xl">
+					{data.allProducts.map((p) => (
+						<Box my={3} w="100%" borderWidth="1px" borderRadius="lg">
+							<Flex>
+								<Img maxW="200" maxH="150" src={p.url[0]} alt={p.name} p={2} />
+								<Box p={3} alignSelf="center">
 									<Badge my={2} borderRadius="full" px="2" colorScheme="yellow">
 										{p.category}
 									</Badge>
-									<Text fontSize="1.2rem" fontWeight="bold" as="h5">
+									<NextLink href="/shop/[id]" as={`/shop/${p.id}`}>
+										<Text fontWeight="semibold" color="brand.300">
+											{p.name.length > 18
+												? (p.name = p.name.substring(0, 18) + "...")
+												: p.name}
+										</Text>
+									</NextLink>
+									<Text fontSize="1.4em" color="brand.200" fontWeight="bold">
 										₹ {p.price}
 									</Text>
-									<Flex>
-										<Text ml="auto">by {p.vendor.brandName}</Text>
-									</Flex>
 								</Box>
-							</Box>
-						</>
+							</Flex>
+						</Box>
 					))}
-				</SimpleGrid>
-			</Container>
+				</Container>
+			) : (
+				<Container my={4} maxW="container.xl">
+					<SimpleGrid columns={3} spacing="0.6rem">
+						{data?.allProducts.map((p) => (
+							<>
+								<Box
+									maxW="3xl"
+									borderWidth="1px"
+									borderRadius="lg"
+									overflow="hidden"
+								>
+									<Img src={p.url[0]} alt={p.name} />
+									<Box p={3}>
+										<NextLink href="/shop/[id]" as={`/shop/${p.id}`}>
+											<Text
+												fontSize="1.4rem"
+												fontWeight="semibold"
+												as="h4"
+												isTruncated
+											>
+												{p.name}
+											</Text>
+										</NextLink>
+
+										<Badge
+											my={2}
+											borderRadius="full"
+											px="2"
+											colorScheme="yellow"
+										>
+											{p.category}
+										</Badge>
+										<Text fontSize="1.2rem" fontWeight="bold" as="h5">
+											₹ {p.price}
+										</Text>
+										<Flex>
+											<Text ml="auto">by {p.vendor.brandName}</Text>
+										</Flex>
+									</Box>
+								</Box>
+							</>
+						))}
+					</SimpleGrid>
+				</Container>
+			)}
 		</>
 	);
 };
