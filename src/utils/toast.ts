@@ -12,7 +12,7 @@ export const notify = (text: string, isError: boolean) => {
 			progress: undefined,
 		});
 	}
-	toast.dark(text, {
+	toast.success(text, {
 		position: "bottom-center",
 		autoClose: 5000,
 		hideProgressBar: false,
@@ -24,7 +24,7 @@ export const notify = (text: string, isError: boolean) => {
 };
 
 export const clip = () => {
-	return toast.dark("UPI ID Copied", {
+	return toast.warn("UPI ID Copied", {
 		position: "bottom-center",
 		autoClose: 1000,
 		hideProgressBar: true,

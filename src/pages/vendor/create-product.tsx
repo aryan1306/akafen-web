@@ -18,27 +18,21 @@ import {
 	Textarea,
 	useMediaQuery,
 } from "@chakra-ui/react";
-import firebase from "firebase";
-import { useRouter } from "next/router";
-import "firebase/storage";
 import { Form, Formik } from "formik";
+import { withUrqlClient } from "next-urql";
+import Head from "next/head";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { category } from "../../components/category";
 import {
 	useCreateProductMutation,
 	useVendorMeQueryQuery,
 } from "../../generated/graphql";
-import { firebaseConfig } from "../../utils/firebaseConfig";
-import { notify } from "../../utils/toast";
-import { withUrqlClient } from "next-urql";
 import { createUrqlClient } from "../../utils/createUrqlClient";
-import Head from "next/head";
+import { notify } from "../../utils/toast";
 
 const CreateProduct = () => {
 	const history = useRouter();
-	!firebase.apps.length
-		? firebase.initializeApp(firebaseConfig)
-		: firebase.app();
 
 	const [{ fetching, data }] = useVendorMeQueryQuery({});
 	const [, createProduct] = useCreateProductMutation();
@@ -46,11 +40,12 @@ const CreateProduct = () => {
 	const [files, setFiles] = useState([] as File[]);
 	const [fileLength, setFileLength] = useState(0);
 	const [url, setUrl] = useState<string[]>([]);
-	const [progressState, setProgressState] = useState(0);
-	const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const [clicked, setClicked] = useState(false);
+	const onFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		setFileLength(e.target.files!.length);
 		for (let i = 0; i < e.target.files!.length; i++) {
 			const newFile = e.target.files![i];
+			// const compFile = await imageCompression(newFile, options);
 			setFiles((prevState) => [...prevState, newFile]);
 			// console.log(newFile);
 		}
@@ -64,36 +59,20 @@ const CreateProduct = () => {
 	}, [fetching, data, history]);
 	const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		e.preventDefault();
-		const promises: any[] = [];
-		files.forEach((file) => {
-			const metadata = {
-				contentType: "image/*",
-			};
-			const uploadTask = firebase
-				.storage()
-				.ref()
-				.child("test/" + file.name)
-				.put(file, metadata);
-			promises.push(uploadTask);
-			uploadTask.on(
-				firebase.storage.TaskEvent.STATE_CHANGED,
-				(snapshot) => {
-					const progress =
-						(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-					if (snapshot.state === firebase.storage.TaskState.RUNNING) {
-						setProgressState(progress);
-					}
-				},
-				(error) => console.log(error),
-				async () => {
-					const downloadUrl = await uploadTask.snapshot.ref.getDownloadURL();
-					setUrl((prevState) => [...prevState, downloadUrl]);
-				}
+		setClicked(!clicked);
+		files.forEach(async (file) => {
+			const data = new FormData();
+			data.append("file", file);
+			data.append("upload_preset", "akafen");
+			data.append("cloud_name", "ddeuqomyq");
+			let res = await fetch(
+				"https://api.cloudinary.com/v1_1/ddeuqomyq/image/upload",
+				{ method: "POST", body: data, mode: "cors" }
 			);
+			let resData = await res.json();
+			console.log(resData);
+			setUrl((prevState) => [...prevState, resData.secure_url]);
 		});
-		Promise.all(promises)
-			.then(() => alert("All files uploaded"))
-			.catch((err) => console.log(err.code));
 	};
 
 	return (
@@ -199,6 +178,9 @@ const CreateProduct = () => {
 									<input type="file" multiple onChange={onFileChange} />
 								</label>
 								<Text color="#718096" mt={2} textAlign="center">
+									Max Photos: 5
+								</Text>
+								<Text color="#718096" mt={2} textAlign="center">
 									Click on the upload button after selecting the photos
 								</Text>
 								<Button
@@ -206,13 +188,32 @@ const CreateProduct = () => {
 									aria-label="upload"
 									mt={2}
 									color="brand.200"
-									disabled={fileLength < 1}
+									disabled={fileLength < 1 || fileLength > 5}
 									isLoading={isSubmitting}
 									onClick={handleClick}
 									rightIcon={<AttachmentIcon />}
 								>
 									Upload
 								</Button>
+								<br />
+								{clicked ? (
+									<Text my={2}>
+										Please wait this might take a while, DON'T press upload
+										again
+									</Text>
+								) : null}
+								<Text my={2}>No. of files uploaded</Text>
+								<Text>{url.length}</Text>
+								<Progress
+									hasStripe
+									my={2}
+									colorScheme="yellow"
+									value={
+										url.length === 0 && fileLength === 0
+											? 0
+											: (url.length * 100) / fileLength
+									}
+								/>
 								<br />
 								<Button
 									my={4}
@@ -224,7 +225,6 @@ const CreateProduct = () => {
 								>
 									Submit
 								</Button>
-								<Progress my={5} hasStripe value={progressState} />
 							</Form>
 						)}
 					</Formik>

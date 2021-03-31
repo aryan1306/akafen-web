@@ -42,7 +42,7 @@ const Navbar = () => {
 				<RouteLink fontSize="1.4rem" p={7} as={NextLink} href="/aboutus">
 					About Us
 				</RouteLink>
-				<RouteLink p={7} as={NextLink} href="/vendor-register">
+				<RouteLink p={7} as={NextLink} href="/vendor/auth">
 					Seller Panel
 				</RouteLink>
 				<RouteLink fontSize="1.4rem" p={7} as={NextLink} href="/users/register">

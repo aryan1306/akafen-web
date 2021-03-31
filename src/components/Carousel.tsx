@@ -14,42 +14,42 @@ const IndexCarousel = () => {
 		{
 			id: 1,
 			url:
-				"https://res.cloudinary.com/ddeuqomyq/image/upload/v1615919110/akafen/IMG_20181218_141556_bfewwz.jpg",
+				"https://res.cloudinary.com/ddeuqomyq/image/upload/q_auto:eco/v1615919110/akafen/IMG_20181218_141556_bfewwz.jpg",
 		},
 		{
 			id: 2,
 			url:
-				"https://res.cloudinary.com/ddeuqomyq/image/upload/v1615919109/akafen/IMG_20181206_140132_htablc.jpg",
+				"https://res.cloudinary.com/ddeuqomyq/image/upload/q_auto:eco/v1615919109/akafen/IMG_20181206_140132_htablc.jpg",
 		},
 		{
 			id: 3,
 			url:
-				"https://res.cloudinary.com/ddeuqomyq/image/upload/v1615919108/akafen/IMG_20181024_141549_tzd19i.jpg",
+				"https://res.cloudinary.com/ddeuqomyq/image/upload/q_auto:eco/v1615919108/akafen/IMG_20181024_141549_tzd19i.jpg",
 		},
 		{
 			id: 4,
 			url:
-				"https://res.cloudinary.com/ddeuqomyq/image/upload/v1615919108/akafen/IMG_20181009_134908_t9wvxe.jpg",
+				"https://res.cloudinary.com/ddeuqomyq/image/upload/q_auto:eco/v1615919108/akafen/IMG_20181009_134908_t9wvxe.jpg",
 		},
 		{
 			id: 5,
 			url:
-				"https://res.cloudinary.com/ddeuqomyq/image/upload/v1615919108/akafen/IMG_20181204_142308_jwzxh7.jpg",
+				"https://res.cloudinary.com/ddeuqomyq/image/upload/q_auto:eco/v1615919108/akafen/IMG_20181204_142308_jwzxh7.jpg",
 		},
 		{
 			id: 6,
 			url:
-				"https://res.cloudinary.com/ddeuqomyq/image/upload/v1615919108/akafen/IMG_20181009_134905_jdzmqd.jpg",
+				"https://res.cloudinary.com/ddeuqomyq/image/upload/q_auto:eco/v1615919108/akafen/IMG_20181009_134905_jdzmqd.jpg",
 		},
 		{
 			id: 7,
 			url:
-				"https://res.cloudinary.com/ddeuqomyq/image/upload/v1615919108/akafen/IMG_20180617_195124_nmnfpb.jpg",
+				"https://res.cloudinary.com/ddeuqomyq/image/upload/q_auto:eco/v1615919108/akafen/IMG_20180617_195124_nmnfpb.jpg",
 		},
 		{
 			id: 8,
 			url:
-				"https://res.cloudinary.com/ddeuqomyq/image/upload/v1615919107/akafen/IMG_20181004_141606_xtaxog.jpg",
+				"https://res.cloudinary.com/ddeuqomyq/image/upload/q_auto:eco/v1615919107/akafen/IMG_20181004_141606_xtaxog.jpg",
 		},
 	];
 	return (
