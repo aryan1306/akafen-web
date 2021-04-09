@@ -1,0 +1,10 @@
+mutation EditProfile($data: EditProfileInput!){
+  editProfile(data: $data){
+    brandName
+    city
+    mobile
+    website
+    instaURL
+    facebook
+  }
+}

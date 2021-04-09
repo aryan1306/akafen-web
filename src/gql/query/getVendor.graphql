@@ -1,0 +1,11 @@
+query GetVendor {
+  getVendor{
+    id
+    brandName
+    facebook
+    instaURL
+    website
+    whatsapp
+    mobile
+  }
+}

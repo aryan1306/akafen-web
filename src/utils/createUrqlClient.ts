@@ -28,7 +28,7 @@ export const createUrqlClient = (ssrExchange: any, ctx: any) => {
 		cookie = ctx?.req?.headers?.cookie;
 	}
 	return {
-		url: process.env.NEXT_PUBLIC_API_URL!,
+		url: process.env.NEXT_PUBLIC_LOC_URL!,
 		fetchOptions: {
 			credentials: "include" as const,
 			headers: cookie ? { cookie } : undefined,
@@ -38,9 +38,6 @@ export const createUrqlClient = (ssrExchange: any, ctx: any) => {
 			cacheExchange({
 				updates: {
 					Mutation: {
-						// createProduct: (_result, _args, cache, _info) => {
-						// 	cache.invalidate({ __typename: "Query" }, "allProducts");
-						// },
 						createProduct: (_result, _args, cache, _info) => {
 							const key = "Query";
 							//@ts-ignore
@@ -56,10 +53,20 @@ export const createUrqlClient = (ssrExchange: any, ctx: any) => {
 							//@ts-ignore
 							const fields = cache
 								.inspectFields(key)
-								.filter((field) => field.fieldName.includes("Products"))
+								.filter((field) =>
+									field.fieldName.includes("Products" || "query")
+								)
 								.forEach((field) => {
 									cache.invalidate(key, field.fieldKey);
 								});
+						},
+						userLogout: (_result, _args, cache, _info) => {
+							betterUpdateQuery<LogoutMutation, UserMeQuery>(
+								cache,
+								{ query: UserMeDocument },
+								_result,
+								() => ({ userMe: null })
+							);
 						},
 						logout: (_result, _args, cache, _info) => {
 							betterUpdateQuery<LogoutMutation, VendorMeQueryQuery>(

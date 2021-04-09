@@ -63,10 +63,10 @@ const CreateProduct = () => {
 		files.forEach(async (file) => {
 			const data = new FormData();
 			data.append("file", file);
-			data.append("upload_preset", "akafen");
-			data.append("cloud_name", "ddeuqomyq");
+			data.append("upload_preset", process.env.UPLOAD_PRESET!);
+			data.append("cloud_name", process.env.CLOUD_NAME!);
 			let res = await fetch(
-				"https://api.cloudinary.com/v1_1/ddeuqomyq/image/upload",
+				`https://api.cloudinary.com/v1_1/${process.env.CLOUD_NAME}/image/upload`,
 				{ method: "POST", body: data, mode: "cors" }
 			);
 			let resData = await res.json();

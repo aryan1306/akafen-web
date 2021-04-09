@@ -19,7 +19,7 @@ const ConfirmPayment = () => {
 	const history = useRouter();
 	const [, confirmPayment] = usePaymentConfirmationMutation();
 	return (
-		<Container maW="md">
+		<Container maxW="md">
 			<Heading>Payment Confirmation</Heading>
 			<Formik
 				initialValues={{ code: "" }}
@@ -39,7 +39,7 @@ const ConfirmPayment = () => {
 					}
 				}}
 			>
-				{({ isSubmitting, handleChange }) => (
+				{({ isSubmitting, handleChange, values }) => (
 					<Form>
 						<Box my={3}>
 							<FormControl name="code" id="code" isRequired>
@@ -48,8 +48,8 @@ const ConfirmPayment = () => {
 							</FormControl>
 						</Box>
 						<Button
-							disabled={isSubmitting}
 							isLoading={isSubmitting}
+							disabled={values.code.length !== 4 ? true : false}
 							type="submit"
 						>
 							Confirm

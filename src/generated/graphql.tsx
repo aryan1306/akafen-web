@@ -94,6 +94,16 @@ export type VendorInput = {
   instaURL?: Maybe<Scalars['String']>;
 };
 
+export type EditProfileInput = {
+  brandName?: Maybe<Scalars['String']>;
+  city?: Maybe<Scalars['String']>;
+  website?: Maybe<Scalars['String']>;
+  facebook?: Maybe<Scalars['String']>;
+  whatsapp?: Maybe<Scalars['String']>;
+  mobile?: Maybe<Scalars['String']>;
+  instaURL?: Maybe<Scalars['String']>;
+};
+
 export type Query = {
   __typename?: 'Query';
   myProducts?: Maybe<Array<Product>>;
@@ -105,6 +115,7 @@ export type Query = {
   hello: Scalars['String'];
   vendorMeQuery?: Maybe<Vendor>;
   allVendors: Array<Vendor>;
+  getVendor: Vendor;
 };
 
 
@@ -125,6 +136,7 @@ export type Mutation = {
   userRegister: Users;
   userLogin: Users;
   confirmUser: Scalars['Boolean'];
+  userLogout: Scalars['Boolean'];
   register: Vendor;
   login: Vendor;
   confirmVendor: Scalars['Boolean'];
@@ -132,6 +144,7 @@ export type Mutation = {
   confirmPayment: Scalars['Boolean'];
   logout: Scalars['Boolean'];
   deleteVendor: Scalars['Boolean'];
+  editProfile: Vendor;
 };
 
 
@@ -194,6 +207,11 @@ export type MutationConfirmPaymentArgs = {
 
 export type MutationDeleteVendorArgs = {
   phone: Scalars['String'];
+};
+
+
+export type MutationEditProfileArgs = {
+  data: EditProfileInput;
 };
 
 export type PaymentConfirmationMutationVariables = Exact<{
@@ -339,12 +357,33 @@ export type EditProductMutation = (
   )> }
 );
 
+export type EditProfileMutationVariables = Exact<{
+  data: EditProfileInput;
+}>;
+
+
+export type EditProfileMutation = (
+  { __typename?: 'Mutation' }
+  & { editProfile: (
+    { __typename?: 'Vendor' }
+    & Pick<Vendor, 'brandName' | 'city' | 'mobile' | 'website' | 'instaURL' | 'facebook'>
+  ) }
+);
+
 export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
 
 
 export type LogoutMutation = (
   { __typename?: 'Mutation' }
   & Pick<Mutation, 'logout'>
+);
+
+export type UserLogoutMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type UserLogoutMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'userLogout'>
 );
 
 export type UserMeQueryVariables = Exact<{ [key: string]: never; }>;
@@ -382,6 +421,17 @@ export type AllProductsQuery = (
       & Pick<Vendor, 'id' | 'brandName'>
     ) }
   )> }
+);
+
+export type GetVendorQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetVendorQuery = (
+  { __typename?: 'Query' }
+  & { getVendor: (
+    { __typename?: 'Vendor' }
+    & Pick<Vendor, 'id' | 'brandName' | 'facebook' | 'instaURL' | 'website' | 'whatsapp' | 'mobile'>
+  ) }
 );
 
 export type MyProductsQueryVariables = Exact<{ [key: string]: never; }>;
@@ -581,6 +631,22 @@ export const EditProductDocument = gql`
 export function useEditProductMutation() {
   return Urql.useMutation<EditProductMutation, EditProductMutationVariables>(EditProductDocument);
 };
+export const EditProfileDocument = gql`
+    mutation EditProfile($data: EditProfileInput!) {
+  editProfile(data: $data) {
+    brandName
+    city
+    mobile
+    website
+    instaURL
+    facebook
+  }
+}
+    `;
+
+export function useEditProfileMutation() {
+  return Urql.useMutation<EditProfileMutation, EditProfileMutationVariables>(EditProfileDocument);
+};
 export const LogoutDocument = gql`
     mutation Logout {
   logout
@@ -589,6 +655,15 @@ export const LogoutDocument = gql`
 
 export function useLogoutMutation() {
   return Urql.useMutation<LogoutMutation, LogoutMutationVariables>(LogoutDocument);
+};
+export const UserLogoutDocument = gql`
+    mutation UserLogout {
+  userLogout
+}
+    `;
+
+export function useUserLogoutMutation() {
+  return Urql.useMutation<UserLogoutMutation, UserLogoutMutationVariables>(UserLogoutDocument);
 };
 export const UserMeDocument = gql`
     query UserMe {
@@ -634,6 +709,23 @@ export const AllProductsDocument = gql`
 
 export function useAllProductsQuery(options: Omit<Urql.UseQueryArgs<AllProductsQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<AllProductsQuery>({ query: AllProductsDocument, ...options });
+};
+export const GetVendorDocument = gql`
+    query GetVendor {
+  getVendor {
+    id
+    brandName
+    facebook
+    instaURL
+    website
+    whatsapp
+    mobile
+  }
+}
+    `;
+
+export function useGetVendorQuery(options: Omit<Urql.UseQueryArgs<GetVendorQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetVendorQuery>({ query: GetVendorDocument, ...options });
 };
 export const MyProductsDocument = gql`
     query MyProducts {

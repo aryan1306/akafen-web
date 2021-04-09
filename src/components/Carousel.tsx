@@ -14,42 +14,42 @@ const IndexCarousel = () => {
 		{
 			id: 1,
 			url:
-				"https://res.cloudinary.com/ddeuqomyq/image/upload/q_auto:eco/v1615919110/akafen/IMG_20181218_141556_bfewwz.jpg",
+				"https://res.cloudinary.com/ddeuqomyq/image/upload/q_72/v1617170313/akafen/vyi1xmp2gonysazek9bn.jpg",
 		},
 		{
 			id: 2,
 			url:
-				"https://res.cloudinary.com/ddeuqomyq/image/upload/q_auto:eco/v1615919109/akafen/IMG_20181206_140132_htablc.jpg",
+				"https://res.cloudinary.com/ddeuqomyq/image/upload/q_72/v1617170313/akafen/ss8zszuzbhyi9fbdjhlr.jpg",
 		},
 		{
 			id: 3,
 			url:
-				"https://res.cloudinary.com/ddeuqomyq/image/upload/q_auto:eco/v1615919108/akafen/IMG_20181024_141549_tzd19i.jpg",
+				"https://res.cloudinary.com/ddeuqomyq/image/upload/q_72/v1617170313/akafen/e2a0wpn1qkdb70jyaeoj.jpg",
 		},
 		{
 			id: 4,
 			url:
-				"https://res.cloudinary.com/ddeuqomyq/image/upload/q_auto:eco/v1615919108/akafen/IMG_20181009_134908_t9wvxe.jpg",
+				"https://res.cloudinary.com/ddeuqomyq/image/upload/q_72/v1617170314/akafen/zym8bklreuv5kkkgds5w.jpg",
 		},
 		{
 			id: 5,
 			url:
-				"https://res.cloudinary.com/ddeuqomyq/image/upload/q_auto:eco/v1615919108/akafen/IMG_20181204_142308_jwzxh7.jpg",
+				"https://res.cloudinary.com/ddeuqomyq/image/upload/q_72/v1617170314/akafen/a0sterrg22hl1pr5wxhh.jpg",
 		},
 		{
 			id: 6,
 			url:
-				"https://res.cloudinary.com/ddeuqomyq/image/upload/q_auto:eco/v1615919108/akafen/IMG_20181009_134905_jdzmqd.jpg",
+				"https://res.cloudinary.com/ddeuqomyq/image/upload/q_72/v1617170315/akafen/c66e23hogvkcuanjw415.jpg",
 		},
 		{
 			id: 7,
 			url:
-				"https://res.cloudinary.com/ddeuqomyq/image/upload/q_auto:eco/v1615919108/akafen/IMG_20180617_195124_nmnfpb.jpg",
+				"https://res.cloudinary.com/ddeuqomyq/image/upload/q_72/v1617170316/akafen/jyuvkpack8tffk0vesbv.jpg",
 		},
 		{
 			id: 8,
 			url:
-				"https://res.cloudinary.com/ddeuqomyq/image/upload/q_auto:eco/v1615919107/akafen/IMG_20181004_141606_xtaxog.jpg",
+				"https://res.cloudinary.com/ddeuqomyq/image/upload/q_72/v1617170316/akafen/yaabrb9nxyltq87mofgw.jpg",
 		},
 	];
 	return (

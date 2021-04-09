@@ -1,6 +1,7 @@
 import {
 	Box,
 	Button,
+	ButtonGroup,
 	Container,
 	Flex,
 	FormControl,
@@ -59,12 +60,9 @@ const EditPost = () => {
 		<>
 			<Navbar />
 			<Container maxW="container.lg">
-				<Flex>
-					<Button my={2} variant="link" onClick={() => router.back()}>
-						Back
-					</Button>
-				</Flex>
-				<Heading textAlign="center">Edit Product</Heading>
+				<Heading mt={3} color="brand.300" textAlign="center">
+					Edit Product
+				</Heading>
 				<Box m={4}>
 					<Formik
 						initialValues={{
@@ -135,15 +133,27 @@ const EditPost = () => {
 										/>
 									</FormControl>
 								</Box>
-								<Button
-									isLoading={isSubmitting}
-									type="submit"
-									bg="brand.300"
-									color="white"
-									_hover={{ bg: "brand.200" }}
-								>
-									Submit Changes
-								</Button>
+								<ButtonGroup spacing={4}>
+									<Button
+										isLoading={isSubmitting}
+										type="submit"
+										bg="brand.300"
+										color="white"
+										_hover={{ bg: "brand.200" }}
+									>
+										Submit Changes
+									</Button>
+									<Button
+										variant="outline"
+										borderColor="brand.300"
+										color="brand.300"
+										onClick={() => {
+											history.back();
+										}}
+									>
+										Cancel
+									</Button>
+								</ButtonGroup>
 							</Form>
 						)}
 					</Formik>

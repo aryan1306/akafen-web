@@ -75,9 +75,6 @@ const All = () => {
 							<Flex>
 								<Img maxW="200" maxH="150" src={p.url[0]} alt={p.name} p={2} />
 								<Box p={3} alignSelf="center">
-									<Badge my={2} borderRadius="full" px="2" colorScheme="yellow">
-										{p.category}
-									</Badge>
 									<NextLink href="/shop/[id]" as={`/shop/${p.id}`}>
 										<Text fontWeight="semibold" color="brand.300">
 											{p.name.length > 18

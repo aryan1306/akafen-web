@@ -73,7 +73,21 @@ const Post = () => {
 			<NextSeo
 				title={`Shop ${data.product.name}`}
 				description={`${data.product.description}`}
-				canonical={`https://akafenflea.online/${data.product.id}`}
+				canonical="https://akafenflea.online"
+				openGraph={{
+					type: "website",
+					url: `https://akafenflea.online/${data.product.id}`,
+					title: `Shop ${data.product.name}`,
+					description: data.product.description,
+					images: [
+						{
+							url: data.product.url[0],
+							width: 160,
+							height: 250,
+							alt: `${data.product.name}`,
+						},
+					],
+				}}
 			/>
 			<Navbar />
 			<Carousel
