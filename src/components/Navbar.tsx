@@ -11,6 +11,7 @@ import {
 	Drawer,
 	DrawerOverlay,
 	DrawerContent,
+	DrawerCloseButton,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import React from "react";
@@ -163,35 +164,41 @@ const Navbar = () => {
 					<Drawer
 						isOpen={isOpen}
 						placement="left"
+						size="xs"
 						onClose={onClose}
 						finalFocusRef={btnRef}
 					>
 						<DrawerOverlay>
 							<DrawerContent bg="brand.100">
+								<DrawerCloseButton />
 								<DrawerContents />
 							</DrawerContent>
 						</DrawerOverlay>
 					</Drawer>
 					<Flex
 						p={1}
-						ml={4}
+						ml={2}
 						h="5.5rem"
 						bg="brand.100"
 						justifyContent="center"
 						alignItems="center"
 					>
-						<Box>
+						<Flex>
 							<Image
 								src="https://res.cloudinary.com/ddeuqomyq/image/upload/q_76/v1615898033/akafen-logo_fmkzoj.svg"
 								alt="logo"
 								w="20"
 							/>
-						</Box>
-						<NextLink href="/">
-							<Heading fontSize={mobile ? "1.5rem" : "2rem"} color="brand.300">
-								Akafen Flea
-							</Heading>
-						</NextLink>
+							<NextLink href="/">
+								<Heading
+									alignSelf="center"
+									fontSize={mobile ? "1.5rem" : "2rem"}
+									color="brand.300"
+								>
+									Akafen Flea
+								</Heading>
+							</NextLink>
+						</Flex>
 					</Flex>
 				</Flex>
 			) : (
