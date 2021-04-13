@@ -10,6 +10,8 @@ export default class Document extends NextDocument {
 						name="description"
 						content="Akafen Flea brings you all the uniqueness and exictement of Flea Market Online shop from apparels like kurtis, dress material shoes dress handmade goods and may more!!"
 					/>
+					<link rel="preconnect" href="https://res.cloudinary.com" />
+					<link rel="dns-prefetch" href="https://res.cloudinary.com" />
 					<link
 						rel="apple-touch-icon"
 						sizes="180x180"

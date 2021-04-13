@@ -17,6 +17,7 @@ import TestimonialCarousel from "../components/TestimonialCarousel";
 import { list } from "../components/list";
 import { IoChevronForwardOutline } from "react-icons/io5";
 import NextLink from "next/link";
+import Head from "next/head";
 import { NextSeo } from "next-seo";
 // import firebase from "firebase";
 
@@ -26,6 +27,18 @@ const Index = () => {
 
 	return (
 		<>
+			<Head>
+				<link
+					rel="preload"
+					as="image"
+					href="https://res.cloudinary.com/ddeuqomyq/image/upload/q_70/v1617170313/akafen/vyi1xmp2gonysazek9bn.jpg"
+				/>
+				<link
+					rel="preload"
+					as="image"
+					href="https://res.cloudinary.com/ddeuqomyq/image/upload/q_70/v1617170313/akafen/ss8zszuzbhyi9fbdjhlr.jpg"
+				/>
+			</Head>
 			<NextSeo
 				title="Akafen Flea Online- Online Flea Marketplace"
 				description="We all love flea markets and we love to shop our favorite shirts, t-shirts, kurtis, dress material and many more unique products"
